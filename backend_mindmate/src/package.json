@@ -1,0 +1,21 @@
+
+{
+  "name": "mindmate",
+  "version": "1.0.0",
+  "description": "AI Notes Workspace + Learning Store with Razorpay Payments",
+  "homepage": "https://github.com/nitesh404240/mindmate#readme",
+  "bugs": {
+    "url": "https://github.com/nitesh404240/mindmate/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nitesh404240/mindmate.git"
+  },
+  "license": "ISC",
+  "author": "Nitesh choudhary",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
