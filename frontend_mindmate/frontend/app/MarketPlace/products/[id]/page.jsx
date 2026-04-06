@@ -34,6 +34,7 @@ export default function SellerProductPage() {
   const {
     addToCart,
     items,
+    removeFromCart,
     updateQuantity
   } = useCartStore();
 
@@ -83,9 +84,12 @@ export default function SellerProductPage() {
       await updateQuantity(selectedProduct._id, quantity + 1);
     }
   };
-
   const decreaseQty = async () => {
-    if (quantity <= 1) return;
+    console.log(quantity);
+    if (quantity <=1){
+       removeFromCart(selectedProduct._id)
+       return ;
+    }
     await updateQuantity(selectedProduct._id, quantity - 1);
   };
 
@@ -344,7 +348,7 @@ export default function SellerProductPage() {
       {/* VIEW CART BUTTON */}
 
       <button
-        onClick={() => router.push("/MarketPlace/CartAction/view")}
+        onClick={() => router.push("/MarketPlace/CartActions/view")}
         className="px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 font-semibold"
       >
         View Cart

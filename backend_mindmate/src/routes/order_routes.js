@@ -11,12 +11,12 @@ import {
   deleteOrder
 } from "../controllers/ordercontroller.js";
 
-import { verifyRazorpayPayment } from "../controllers/paymentcontroller.js";
+import { mockPayment, verifyRazorpayPayment } from "../controllers/paymentcontroller.js";
 
 const router = Router();
 
 router.post("/verify-payment", verifyRazorpayPayment);
-
+router.post("/verify-mock-payment", mockPayment);
 router.post("/create", verifyJWT, createOrder);
 
 router.get("/my-orders", verifyJWT, getUserOrders);

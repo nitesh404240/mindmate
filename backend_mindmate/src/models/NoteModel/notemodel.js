@@ -9,10 +9,13 @@ const NotesSchema = new mongoose.Schema(
     },
 
     title: {
+      unique : true,
       type: String,
      
     },
-
+    audioUrl: {
+    type: String
+  },
     content: {
       type: String,
   
@@ -28,10 +31,7 @@ const NotesSchema = new mongoose.Schema(
     }
    ,
 
-    VoiceToNotes: { 
-        type: String,
-         default: "" 
-    }, 
+  
 
   isDraft: { type: Boolean, default: true },
 

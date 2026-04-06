@@ -65,13 +65,20 @@ const OrderSchema = new mongoose.Schema(
     },  
     orderStatus: {
       type: String,
-      enum: ["processing", "completed", "cancelled"],
+      enum: ["processing", "completed", "cancelled","pending"],
       default: "processing",
     },
-    address :{
-       type : String,
-        required : true 
-    }
+   
+       address: {
+  fullName: String,
+  phone: String,
+  street: String,
+  city: String,
+  state: String,
+  pincode: String,
+  country: String
+}
+    
   },
   { timestamps: true },
   {expireAfterSeconds: 60 * 60 * 24 } // 24 hours 

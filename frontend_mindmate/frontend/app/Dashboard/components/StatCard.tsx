@@ -23,7 +23,9 @@ export default function StatCard({ label, value, icon: Icon, colorClass, trend }
         )}
       </div>
       <div>
+        
         <p className="text-slate-400 text-sm font-medium tracking-wide uppercase">{label}</p>
+        
         <h3 className="text-3xl font-bold mt-1 text-white tracking-tight">{value}</h3>
       </div>
     </div>

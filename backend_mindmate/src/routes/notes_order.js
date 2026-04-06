@@ -1,31 +1,38 @@
 import express from "express";
 import { verifyJWT } from "../middleware/auth.js";
-
+import { upload } from "../middleware/multer.js";
 import {
     createnotes,
     updateNote,
     deletenotes,
     aiSummarizeNote,
-  
-   saveVoiceTranscript,
    getNotesbyid,
    getAllNotes
 } from "../controllers/Notescontroller.js";
+import { transcribeAudio } from "../utils/groqAi.js";
 
 const router = express.Router();
 
 // Protect all routes
 router.use(verifyJWT);
 
-// AI Feature Routes (router.route format)
-router.route("/create").post(createnotes);
-router.route("/update/:id").put(updateNote);
-router.route("/delete").delete(deletenotes);
+
+router
+.route("/create")
+.post(upload.fields([{ name: "audio", maxCount: 1 }]), createnotes);
+
+
+router
+.route("/update/:id")
+.put(upload.fields([{ name: "audio", maxCount: 1 }]), updateNote);
+
+router.route("/delete/:id").delete(deletenotes);
 router.route("/").get(getAllNotes);
 router.route("/:id").get(getNotesbyid);
  router.route("/ai/summarize").post(aiSummarizeNote);
-
- 
-router.route("/voice/:id/save").post(saveVoiceTranscript);
-
+router.post(
+  "/notes/ai/transcribe",
+  upload.single("audio"),
+  transcribeAudio
+);
 export default router;

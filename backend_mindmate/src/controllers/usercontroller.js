@@ -148,6 +148,7 @@ const registeruser = asynchandler(async (req, res) => {
   const newUser = await User.create({
     Username: Username.toLowerCase(),
     Email,
+    address:null,
     password,
     Avatar: avatarURL,
     role : "user"
@@ -267,6 +268,55 @@ const updateprofile = asynchandler(async (req, res, next) => {
     new APIResponse(200, updatedUser, "User profile updated successfully")
   );
 });
+const updateAddress = asynchandler(async (req, res) => {
+
+  const userId = req.user?._id;
+
+  if (!userId) {
+    throw new ApiError(401, "Unauthorized");
+  }
+
+  const {
+    fullName,
+    phone,
+    street,
+    city,
+    state,
+    pincode,
+    country
+  } = req.body;
+
+  if (!fullName || !phone || !street || !city || !state || !pincode) {
+    throw new ApiError(400, "All address fields are required");
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      $set: {
+        address: {
+          fullName,
+          phone,
+          street,
+          city,
+          state,
+          pincode,
+          country: country || "India"
+        }
+      }
+    },
+    { new: true }
+  ).select("-password -refreshToken");
+
+  return res.status(200).json(
+    new APIResponse(
+      200,
+      updatedUser,
+      "Address updated successfully"
+    )
+  );
+
+});
 
 const change_accesstoken_and_refreshtoken = asynchandler(async(req,res,next)=>{
   const refreshtoken = req.cookies?.refreshToken;
@@ -303,4 +353,4 @@ const change_accesstoken_and_refreshtoken = asynchandler(async(req,res,next)=>{
 
 
 
-export { registeruser,checkAuth, loginuser, logoutuser ,changepassword,updateprofile, change_accesstoken_and_refreshtoken};
+export { registeruser,checkAuth,updateAddress, loginuser, logoutuser ,changepassword,updateprofile, change_accesstoken_and_refreshtoken};
