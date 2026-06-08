@@ -21,7 +21,10 @@ const router = useRouter();
 
 useEffect(() => {
 checkAuth();
+if(authUser){
 fetchCart();
+}
+
 }, []);
 
 const isAuthenticated = !!authUser;

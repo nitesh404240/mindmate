@@ -29,7 +29,7 @@ export default function StudentDashboard({ user }: { user: any }) {
 
       const orders = res?.data?.data?.orders || [];
 
-      const count = orders.reduce(
+   const count = orders.reduce(
   (total: number, order: any) => {
     return total + (order.products?.length || 0);
   },

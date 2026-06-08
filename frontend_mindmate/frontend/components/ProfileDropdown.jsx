@@ -20,7 +20,7 @@ const router = useRouter();
 
 const handleLogout = async () => {
 await axiosinstance.post("/users/logout");
-router.push("/login");
+router.push("/Dashboard");
 };
 
 const MenuItem = ({ icon: Icon, label, path }) => (
