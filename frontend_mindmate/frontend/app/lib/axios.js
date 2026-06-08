@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const axiosinstance = axios.create({
-  baseURL : "http://localhost:8005/mindmate",
+  baseURL : "https://mindmate-1-gc94.onrender.com",
   withCredentials : true
 })
