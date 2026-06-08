@@ -30,11 +30,11 @@ export default function StudentDashboard({ user }: { user: any }) {
       const orders = res?.data?.data?.orders || [];
 
       const count = orders.reduce(
-        (total: { total: any }, order: { order: any }) => {
-          return total + order.products.length;
-        },
-        0,
-      );
+  (total: number, order: any) => {
+    return total + (order.products?.length || 0);
+  },
+  0
+);
 
       setPurchaseCount(count);
     };
